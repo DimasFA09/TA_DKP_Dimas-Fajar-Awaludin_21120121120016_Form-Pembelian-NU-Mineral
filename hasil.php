@@ -4,7 +4,7 @@ session_start();
 $isi = $_SESSION['isi'];
 $harga = $_SESSION['harga'];
 $data = $_SESSION['data'];
-$total = [];
+$totalHarga = $_SESSION['totalHarga'];
 
 ?>
 
@@ -26,11 +26,12 @@ $total = [];
             
             <div class="card-body">
                 <div class="nama">
-                    Nama Pembeli : <?= $data['nama'] ?>
+                    Pembeli : <?= $data['nama'] ?>
                 </div>
 
                 <div class="tanggal">
-                    tanggal : <?= date('d M Y') ?>
+                    <?php date_default_timezone_set('Asia/Jakarta');?>
+                    Waktu : <?=date('d-m-Y H:i:s');?>
                 </div>
 
                 <div class="jenis">
@@ -38,8 +39,8 @@ $total = [];
 
                     <?php for($i=1; $i <= 4; $i++): ?>
 
-                        <?php if($data[$i] != ""): ?>
-                            <li><?= $isi[$i] ?> : <?= $data[$i] ?> x <?= $harga[$i] ?> = <?= $total[$i] = $data[$i] * $harga[$i]; ?></li>
+                        <?php if($data[$i] != 0): ?>
+                            <li><?= $isi[$i] ?> : <?= $data[$i] ?> x <?= $harga[$i] ?> = <?= $data[$i] * $harga[$i]; ?></li>
                         <?php endif; ?>
 
                     <?php endfor; ?>
@@ -49,7 +50,7 @@ $total = [];
             </div>
             
             <div class="total">
-                <h4>Total Harga: Rp.<?= number_format(array_sum($total), 0, ',', '.'); ?></h4>
+                <h4>Total Harga: Rp <?= $totalHarga; ?></h4>
             </div>
         </div>
     </div>
